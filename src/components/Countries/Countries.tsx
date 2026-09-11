@@ -22,11 +22,10 @@ export default function Countries({ countriesPromise }: CountriesProps) {
             setVisitedCountries(remainingCountries);
         }
         // Bad practice to use the object reference to check if it is already visited or not. In this case, we are using the country object reference to check if it is already visited or not. This will not work as expected because the country object reference will be different for each country even if they have the same data.
-        if (visitedCountries.includes(country)) {
-            const remainingCountries = visitedCountries.filter(c => c !== country);
-            setVisitedCountries(remainingCountries);
-
-        }
+        // if (visitedCountries.includes(country)) {
+        //     const remainingCountries = visitedCountries.filter(c => c !== country);
+        //     setVisitedCountries(remainingCountries);
+        // }
         else {
             const newVisitedCountries = [...visitedCountries, country];
             setVisitedCountries(newVisitedCountries);
@@ -43,6 +42,7 @@ export default function Countries({ countriesPromise }: CountriesProps) {
                 {
                     countries.map(country =>
                         <Country
+                        //use the unique identifier of the country to set the key prop. In this case, we are using the ccn3 property of the country object as the unique identifier.
                             key={country.ccn3.ccn3}
                             country={country}
                             handleVisitedCountries={handleVisitedCountries} >
