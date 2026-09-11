@@ -14,6 +14,14 @@ export default function Countries({ countriesPromise }: CountriesProps) {
     const [visitedCountries, setVisitedCountries] = useState<CountryType[]>([]);
 
     const handleVisitedCountries = (country: CountryType): void => {
+
+        const isVisited = visitedCountries.some(c => c.ccn3.ccn3 === country.ccn3.ccn3);
+        //good practice to use the unique identifier of the country to check if it is already visited or not. In this case, we are using the ccn3 property of the country object as the unique identifier.
+        if (isVisited) {
+            const remainingCountries = visitedCountries.filter(c => c.ccn3.ccn3 !== country.ccn3.ccn3);
+            setVisitedCountries(remainingCountries);
+        }
+        // Bad practice to use the object reference to check if it is already visited or not. In this case, we are using the country object reference to check if it is already visited or not. This will not work as expected because the country object reference will be different for each country even if they have the same data.
         if (visitedCountries.includes(country)) {
             const remainingCountries = visitedCountries.filter(c => c !== country);
             setVisitedCountries(remainingCountries);
